@@ -17,6 +17,9 @@ struct ContentView: View {
     var body: some View {
         VStack(){
             Text("\(countDownTimer)")
+                .font(.title)
+                .fontWeight(.semibold)
+                .padding()
                 .onReceive(timer) { _ in
                     if countDownTimer > 0 && timerRunning {
                         countDownTimer -= 1
@@ -30,26 +33,40 @@ struct ContentView: View {
                     print("Increment")
                     countDownTimer = countDownTimer + 1
                 } label: {
-                    Image(systemName: "plus")
+                    Image(systemName: "plus").font(.system(size: 22))
                 }
                 Button {
                     print("Decrement")
                     countDownTimer = countDownTimer - 1
                 } label: {
-                    Image(systemName: "minus")
+                    Image(systemName: "minus").font(.system(size: 22))
                 }
+                
+            }
+            
+            HStack(){
                 Button {
                     print("Start CountDown")
                     timerRunning = true
                 } label: {
-                    Text("Start")
+                    Image(systemName: "play.fill").foregroundColor(Color.green)
+                }
+                Button {
+                    print("Pause/Resume CountDown")
+                    if(timerRunning == true){
+                        timerRunning = false
+                    } else {
+                        timerRunning = true
+                    }
+                } label: {
+                    Image(systemName: "pause.fill").foregroundColor(Color.blue)
                 }
                 Button {
                     print("Stop CountDown")
                     timerRunning = false
                     countDownTimer = 0
                 } label: {
-                    Text("Stop")
+                    Image(systemName: "stop.fill").foregroundColor(Color.red)
                 }
             }
         }
